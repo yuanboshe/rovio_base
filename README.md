@@ -39,7 +39,7 @@ Change the parameter values to yours
 > $ roscd rovio_test  
 > $ gedit src/rovioTest.cpp
 
-Past the following code in to rovioTest.cpp and save.
+Paste the following code in to rovioTest.cpp and save.
 ```cpp
 #include "ros/ros.h"
 #include "rovio_base/manDrv.h"
@@ -143,7 +143,7 @@ int main(int argc, char **argv)
 }
 ```
 
-#### 5. Edit the rovio_test CMakeLists.txt located at ~/row_ws/src/rovio_test/CMakeLists.txt and change the related regions as follows:
+#### 5. Edit the rovio_test CMakeLists.txt located at ~/row_ws/src/rovio_test/CMakeLists.txt and change the related regions as follows(or just add at the end)
 ```
 add_executable(rovioTest src/rovioTest.cpp)  
 target_link_libraries(rovioTest ${catkin_LIBRARIES})  
