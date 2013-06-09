@@ -22,6 +22,7 @@ Usage
 #### 2. Edit rovioServer.launch
 > $ roscd rovio_base  
 > $ gedit launch/rovioServer.launch
+
 Modify the parameters as your values
 ```
 <param name="/rovio_base/host" type="string" value="192.168.10.18" />  
