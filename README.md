@@ -142,6 +142,11 @@ int main(int argc, char **argv)
   return 0;
 }
 ```
+About how to use the API, you can refer to [Rovio's CGI document](http://www.wowwee.com/static/support/rovio/manuals/Rovio_API_Specifications_v1.2.pdf).
+The above test program shows that three services you can use: "rovioControl", "rovioImage" and "rovioReport". You can find
+them as ManualDrive(), GetImage, GetMCUReport () in the above document.
+
+Also, you may prefer to use the rovioParser class directly, that avoids using ROS's service and client frame.
 
 #### 5. Edit the rovio_test CMakeLists.txt located at ~/row_ws/src/rovio_test/CMakeLists.txt and change the related regions as follows(or just add at the end)
 ```
