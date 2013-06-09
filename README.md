@@ -142,7 +142,7 @@ int main(int argc, char **argv)
   return 0;
 }
 ```
-About how to use the API, you can refer to [Rovio's CGI document](http://www.wowwee.com/static/support/rovio/manuals/Rovio_API_Specifications_v1.2.pdf).
+About how to use the API, you can refer to [Rovio API document](http://www.wowwee.com/static/support/rovio/manuals/Rovio_API_Specifications_v1.2.pdf, "Rovio API document").
 The above test program shows that three services you can use: "rovioControl", "rovioImage" and "rovioReport". You can find
 them as ManualDrive(), GetImage, GetMCUReport () in the above document.
 
