@@ -75,7 +75,7 @@ int main(int argc, char **argv)
 
   ros::ServiceServer crlService = node.advertiseService("rovioControl", control);
   ros::ServiceServer imgService = node.advertiseService("rovioImage", getImage);
-  ros::ServiceServer reportService = node.advertiseService("rovioReport", getImage);
+  ros::ServiceServer reportService = node.advertiseService("rovioReport", getReport);
   ROS_INFO("Rovio server ON...");
   ros::spin();
 

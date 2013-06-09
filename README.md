@@ -16,18 +16,20 @@ Info
 Usage
 ------
 #### 1. Dowload rovio_base package into your catkin workspace (here is ros_ws)
->$ cd ~/ros_ws/src  
->$ git clone https://github.com/yuanboshe/rovio_base.git
+> $ cd ~/ros_ws/src  
+> $ git clone https://github.com/yuanboshe/rovio_base.git
 
-#### 2. Create rovio_test package
->$ cd ~/ros_ws/src  
->$ catkin_create_pkg rovio_test std_msgs roscpp
+#### 2. Edit rovioServer.launch
+> $ roscd rovio_base  
+> $ gedit launch/rovioServer.launch
 
-#### 3. Create rovioTest.cpp
-Currently, you are in ~/row_ws/src/ folder
->$ roscd rovio_test  
->$ cd src  
->$ gedit rovioTest.cpp
+#### 3. Create rovio_test package
+> $ cd ~/ros_ws/src  
+> $ catkin_create_pkg rovio_test std_msgs roscpp cv_bridge
+
+#### 4. Create rovioTest.cpp
+> $ roscd rovio_test  
+> $ gedit src/rovioTest.cpp
 
 Past the following code in to rovioTest.cpp and save.
 ```cpp
@@ -53,35 +55,42 @@ int main(int argc, char **argv)
   // Head middle control
   controlSrv.request.drive = 13;
   controlSrv.request.speed = 9;
-  controlClient.call(controlSrv);
-  ROS_INFO("Control response code: %d", (int )controlSrv.response.code);
-  cv::waitKey(2000);
-
-  // Head down control
-  controlSrv.request.drive = 12;
-  controlSrv.request.speed = 9;
-  controlClient.call(controlSrv);
-  ROS_INFO("Control response code: %d", (int )controlSrv.response.code);
+  if (controlClient.call(controlSrv))
+  {
+    ROS_INFO("Control response code: %d", (int )controlSrv.response.code);
+  }
+  else
+  {
+    ROS_ERROR("Failed to call service rovioControl");
+    return 1;
+  }
 
   // Get report info
-  reportClient.call(controlSrv);
-  int length = reportSrv.response.length;
-  int lDirection = reportSrv.response.lDirection;
-  int lNum = reportSrv.response.lNum;
-  int rDirection = reportSrv.response.rDirection;
-  int rNum = reportSrv.response.rNum;
-  int rearDirection = reportSrv.response.rearDirection;
-  int rearNum = reportSrv.response.rearNum;
-  int headPosition = reportSrv.response.headPosition;
-  bool isLedOn = reportSrv.response.isLedOn;
-  bool isIrOn = reportSrv.response.isIrOn;
-  bool isDetectedBarrier = reportSrv.response.isDetectedBarrier;
-  ROS_INFO("MCU Report:\nlength=%d", length);
-  ROS_INFO("Left direction:num=%d:%d", lDirection, lNum);
-  ROS_INFO("Right direction:num=%d:%d", rDirection, rNum);
-  ROS_INFO("Rear direction:num=%d:%d", rearDirection, rearNum);
-  ROS_INFO("headPosition=%d", headPosition);
-  ROS_INFO("isLedOn=%d,isIrOn=%d,isDetectedBarrier=%d", isLedOn, isIrOn, isDetectedBarrier);
+  if (reportClient.call(reportSrv))
+  {
+    int length = reportSrv.response.length;
+    int lDirection = reportSrv.response.lDirection;
+    int lNum = reportSrv.response.lNum;
+    int rDirection = reportSrv.response.rDirection;
+    int rNum = reportSrv.response.rNum;
+    int rearDirection = reportSrv.response.rearDirection;
+    int rearNum = reportSrv.response.rearNum;
+    int headPosition = reportSrv.response.headPosition;
+    bool isLedOn = reportSrv.response.isLedOn;
+    bool isIrOn = reportSrv.response.isIrOn;
+    bool isDetectedBarrier = reportSrv.response.isDetectedBarrier;
+    ROS_INFO("MCU Report:\nlength=%d", length);
+    ROS_INFO("Left direction:num=%d:%d", lDirection, lNum);
+    ROS_INFO("Right direction:num=%d:%d", rDirection, rNum);
+    ROS_INFO("Rear direction:num=%d:%d", rearDirection, rearNum);
+    ROS_INFO("headPosition=%d", headPosition);
+    ROS_INFO("isLedOn=%d,isIrOn=%d,isDetectedBarrier=%d", isLedOn, isIrOn, isDetectedBarrier);
+  }
+  else
+  {
+    ROS_ERROR("Failed to call service rovioReport");
+    return 1;
+  }
 
   // Show images from camera
   for (int i = 0; i < 20; i++)
@@ -109,24 +118,33 @@ int main(int argc, char **argv)
     }
   }
 
+  // Head down control
+  controlSrv.request.drive = 12;
+  controlSrv.request.speed = 9;
+  if (controlClient.call(controlSrv))
+  {
+    ROS_INFO("Control response code: %d", (int )controlSrv.response.code);
+  }
+  else
+  {
+    ROS_ERROR("Failed to call service rovioControl");
+    return 1;
+  }
+
   return 0;
 }
 ```
 
-#### 4. Edit the rovio_test CMakeLists.txt located at ~/row_ws/src/rovio_test/CMakeLists.txt and change the related regions as follows:
-> find_package(catkin REQUIRED COMPONENTS roscpp std_msgs cv_bridge)  
-add_executable(rovioTest src/rovioTest.cpp)  
-target_link_libraries(rovioTest ${catkin_LIBRARIES})  
-catkin_package( DEPENDS rovio_base )
+#### 5. Edit the rovio_test CMakeLists.txt located at ~/row_ws/src/rovio_test/CMakeLists.txt and change the related regions as follows:
+> add_executable(rovioTest src/rovioTest.cpp)  
+> target_link_libraries(rovioTest ${catkin_LIBRARIES})  
 
-#### 5. Build the packages
+#### 6. Build the packages
 > $ cd ~/ros_ws/  
-$ catkin_make
+> $ catkin_make
 
-#### 6. Run them to test
+#### 7. Run them to test
 Run the follow commands in three terminals respectively
-
 > roscore  
-roslaunch rovio_base rovioServer.launch  
-rosrun rovio_test rovioTest
-
+> roslaunch rovio_base rovioServer.launch  
+> rosrun rovio_test rovioTest
