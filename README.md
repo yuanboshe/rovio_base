@@ -23,10 +23,12 @@ Usage
 > $ roscd rovio_base  
 > $ gedit launch/rovioServer.launch
 Modify the parameters as your values
-> <param name="/rovio_base/host" type="string" value="192.168.10.18" />  
-  <param name="/rovio_base/port" type="string" value="80" />  
-  <param name="/rovio_base/user" type="string" value="admin" />  
-  <param name="/rovio_base/pw" type="string" value="admin" />
+```
+<param name="/rovio_base/host" type="string" value="192.168.10.18" />  
+<param name="/rovio_base/port" type="string" value="80" />  
+<param name="/rovio_base/user" type="string" value="admin" />  
+<param name="/rovio_base/pw" type="string" value="admin" />
+```
 
 #### 3. Create rovio_test package
 > $ cd ~/ros_ws/src  
