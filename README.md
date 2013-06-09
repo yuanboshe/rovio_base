@@ -143,8 +143,10 @@ int main(int argc, char **argv)
 ```
 
 #### 5. Edit the rovio_test CMakeLists.txt located at ~/row_ws/src/rovio_test/CMakeLists.txt and change the related regions as follows:
-> add_executable(rovioTest src/rovioTest.cpp)  
-> target_link_libraries(rovioTest ${catkin_LIBRARIES})  
+```
+add_executable(rovioTest src/rovioTest.cpp)  
+target_link_libraries(rovioTest ${catkin_LIBRARIES})  
+```
 
 #### 6. Build the packages
 > $ cd ~/ros_ws/  
