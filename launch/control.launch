@@ -1,9 +1,0 @@
-<!-- Yuanbo She, 2013.6.5 -->
-<launch>
-  <!-- Edit the parameters here for your Rovio -->
-  <param name="/rovio_base/host" type="string" value="114.212.83.56" />
-  <param name="/rovio_base/port" type="string" value="80" />
-  <param name="/rovio_base/user" type="string" value="admin" />
-  <param name="/rovio_base/pw" type="string" value="123456" />
-  <node pkg="rovio_base" name="rovio_base" type="control"/>
-</launch>
