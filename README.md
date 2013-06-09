@@ -15,7 +15,7 @@ Info
 
 Usage
 ------
-#### 1. Dowload rovio_base package into your catkin workspace (here is ros_ws)
+#### 1. Download rovio_base package into your catkin workspace (here is ros_ws)
 > $ cd ~/ros_ws/src  
 > $ git clone https://github.com/yuanboshe/rovio_base.git
 
@@ -23,7 +23,7 @@ Usage
 > $ roscd rovio_base  
 > $ gedit launch/rovioServer.launch
 
-Modify the parameters as your values
+Change the parameter values to yours
 ```
 <param name="/rovio_base/host" type="string" value="192.168.10.18" />  
 <param name="/rovio_base/port" type="string" value="80" />  
