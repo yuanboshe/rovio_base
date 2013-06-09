@@ -142,6 +142,11 @@ int main(int argc, char **argv)
   return 0;
 }
 ```
+About how to use the API, you can refer to [Rovio API document](http://www.wowwee.com/static/support/rovio/manuals/Rovio_API_Specifications_v1.2.pdf, "Rovio API document").
+The above test program shows that three services you can use: "rovioControl", "rovioImage" and "rovioReport". You can find
+them as ManualDrive(), GetImage, GetMCUReport () in the above document.
+
+Also, you may prefer to use the rovioParser class directly, that avoids using ROS's service and client frame.
 
 #### 5. Edit the rovio_test CMakeLists.txt located at ~/row_ws/src/rovio_test/CMakeLists.txt and change the related regions as follows(or just add at the end)
 ```
@@ -158,3 +163,5 @@ Run the follow commands in three terminals respectively
 > $ roscore  
 > $ roslaunch rovio_base rovioServer.launch  
 > $ rosrun rovio_test rovioTest
+
+After you executed the last command, your WowWee Rovio would head middle and head down, and you would view the images from camera 2 seconds.
