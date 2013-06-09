@@ -158,3 +158,5 @@ Run the follow commands in three terminals respectively
 > $ roscore  
 > $ roslaunch rovio_base rovioServer.launch  
 > $ rosrun rovio_test rovioTest
+
+After you executed the last command, your WowWee Rovio would head middle and head down, and you would view the images from camera 2 seconds.
